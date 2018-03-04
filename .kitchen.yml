@@ -1,25 +1,21 @@
 ---
 driver:
   name: vagrant
-  customize:
-    cpus: 2
-    memory: 2024
-    cpuexecutioncap: 70
 
 provisioner:
-  name: chef_zero
+  name: chef_solo
   always_update_cookbooks: true
 
 verifier:
-      inspec_tests:
-        - test/recipes
+  name: inspec
 
 platforms:
   - name: ubuntu-17.10
-  - name: ubuntu-16.04
 
 suites:
   - name: default
     run_list:
       - recipe[wpmanager::default]
-    attributes:
+    verifier:
+      inspec_tests:
+        - test/recipes
