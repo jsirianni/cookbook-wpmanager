@@ -1,5 +1,4 @@
-# wp-deploy
-Script that deploys wordpress with lets encrypt certificates
+# cookbook-wpmanager
 
-## Supported Configuration
-Ubuntu 17.10, NGINX, Mysql
+TODO: Enter the cookbook description here.
+
