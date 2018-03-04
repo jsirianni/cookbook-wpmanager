@@ -1,2 +1,2 @@
-recipe_include 'wpmanage::firewall'
-recipe_include 'wpmanage::packages'
+include_recipe 'wpmanager::firewall'
+include_recipe 'wpmanager::packages'

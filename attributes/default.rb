@@ -1,4 +1,4 @@
-node[:wp][:packages] = %W[
+default[:wp][:packages] = %W[
       nginx
       mysql-server
       software-properties-common
@@ -19,12 +19,12 @@ node[:wp][:packages] = %W[
       php7.1-curl
 ]
 
-node[:wp][:certbot][:packages] = %W[
+default[:wp][:certbot][:packages] = %W[
       certbot
       python-certbot-nginx
 ]
 
 
-node[:wp][:service][:web] = 'nginx'
-node[:wp][:service][:php] = 'php7.1-fpm'
-node[:wp][:service][:db]  = 'mysql'
+default[:wp][:service][:web] = 'nginx'
+default[:wp][:service][:php] = 'php7.1-fpm'
+default[:wp][:service][:db]  = 'mysql'
