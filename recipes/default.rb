@@ -1,5 +1,2 @@
-#
-# Cookbook:: cookbook-wpmanager
-# Recipe:: default
-#
-# Copyright:: 2018, The Authors, All Rights Reserved.
+recipe_include 'wpmanage::firewall'
+recipe_include 'wpmanage::packages'
