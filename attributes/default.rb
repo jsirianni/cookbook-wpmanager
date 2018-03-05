@@ -1,4 +1,16 @@
+default[:wp][:user] = 'www-data'
+default[:wp][:group] = 'www-data'
+
+# List of sites should be overriden with a role.
+default[:wp][:sites] = ['wordpress']
+
+default[:wp][:mysql][:host] = 'localhost'
+
 default[:wp][:packages] = %W[
+      git
+      vim
+      nano
+      htop
       nginx
       mysql-server
       software-properties-common
@@ -11,7 +23,6 @@ default[:wp][:packages] = %W[
       php7.1-xml
       php7.1-intl
       php7.1-mysql
-      php7.1-mysqli
       php7.1-cli
       php7.1-mcrypt
       php7.1-ldap
@@ -28,3 +39,12 @@ default[:wp][:certbot][:packages] = %W[
 default[:wp][:service][:web] = 'nginx'
 default[:wp][:service][:php] = 'php7.1-fpm'
 default[:wp][:service][:db]  = 'mysql'
+
+
+default[:wp][:nginx_home] = '/etc/nginx'
+default[:wp][:conf][:default][:file] = "#{node[:wp][:nginx_home]}/sites-available/default"
+default[:wp][:conf][:default][:root] = '/var/www/html;'
+default[:wp][:conf][:default][:index] = 'index.php index.html index.htm index.nginx-debian.html;'
+default[:wp][:conf][:default][:fastcgi_pass] = 'unix:/var/run/php/php7.1-fpm.sock;'
+default[:wp][:conf][:default][:fastcgi_cache_key] = '"$scheme$request_method$host$request_uri";'
+default[:wp][:conf][:fastcgi_cache_valid] = "200 60m;"
