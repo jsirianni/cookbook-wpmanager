@@ -1,1 +1,0 @@
-{"wp":{"sites":["example.com","example2.com"]},"run_list":["recipe[wpmanager::default]"]}
