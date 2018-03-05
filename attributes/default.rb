@@ -2,9 +2,10 @@ default[:wp][:user] = 'www-data'
 default[:wp][:group] = 'www-data'
 
 # List of sites should be overriden with a role.
-default[:wp][:sites] = ['wordpress']
+default[:wp][:sites] = ['wordpress'] # NOTE: Override this
 
 default[:wp][:mysql][:host] = 'localhost'
+default[:wp][:mysql][:password] = 'password'  # NOTE: Override this
 
 default[:wp][:packages] = %W[
       git

@@ -6,8 +6,9 @@ node[:wp][:sites].each do |site|
       execute "database_#{site}" do
             user    'root'
             command <<-EOH
-                  mysql \
+                  sudo mysql \
                   --user="root" \
+                  --password="#{node[:wp][:mysql][:password]}" \
                   --execute="CREATE DATABASE IF NOT EXISTS #{db}; GRANT ALL PRIVILEGES ON #{db}.* TO #{db} IDENTIFIED BY '#{pass}'; FLUSH PRIVILEGES;"
             EOH
             action :run

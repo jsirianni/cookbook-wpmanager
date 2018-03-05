@@ -1,4 +1,6 @@
 #!/bin/bash
+sudo apt-get update && sudo apt-get install mysql-server
+sudo mysql_secure_installation
 curl -L https://www.opscode.com/chef/install.sh | sudo bash
 mkdir ~/.chef
 echo "cookbook_path '$HOME'" > $HOME/.chef/knife.rb

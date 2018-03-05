@@ -3,7 +3,7 @@ node = json("/tmp/kitchen/dna.json").params
 
 # sites list
 sites = json("/tmp/kitchen/dna.json").params["wp"]["sites"]
-
+dbpass = json("/tmp/kitchen/dna.json").params["wp"]["mysql"]["password"]
 
 %w[
       git
@@ -145,10 +145,10 @@ end
 # Check for databases and users
 sites.each do |site|
       db = site.split(".")[0] # used for database and user
-      describe command("mysql --user=\"root\" --execute=\"show databases;\" | grep #{db}") do
+      describe command("sudo mysql --user=\"root\" --password=\"#{dbpass}\" --execute=\"show databases;\" | grep #{db}") do
             its('exit_status') { should eq 0 }
       end
-      describe command("mysql --user=\"root\" --execute=\"SELECT user FROM mysql.user WHERE user = '#{db}';\" | grep #{db}") do
+      describe command("sudo mysql --user=\"root\" --password=\"#{dbpass}\" --execute=\"SELECT user FROM mysql.user WHERE user = '#{db}';\" | grep #{db}") do
             its('exit_status') { should eq 0 }
       end
       describe file("/var/www/html/#{site}/wp-config.php") do
