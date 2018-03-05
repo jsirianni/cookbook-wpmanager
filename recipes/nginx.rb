@@ -20,7 +20,7 @@ node[:wp][:sites].each do |site|
             owner  'root'
             group  'root'
             mode   '0644'
-            action :create
+            action :create_if_missing
             notifies :reload, "service[nginx]", :delayed
       end
 
