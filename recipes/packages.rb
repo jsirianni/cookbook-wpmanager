@@ -11,8 +11,7 @@ end
 
 
 package node[:wp][:certbot][:packages] do
-      action :nothing
-      subscribes :upgrade, 'execute[install_certbot_ppa]', :immediately
+      action :upgrade
 end
 
 
