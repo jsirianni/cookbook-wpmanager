@@ -50,3 +50,8 @@ default[:wp][:conf][:default][:index] = 'index.php index.html index.htm index.ng
 default[:wp][:conf][:default][:fastcgi_pass] = 'unix:/var/run/php/php7.1-fpm.sock;'
 default[:wp][:conf][:default][:fastcgi_cache_key] = '"$scheme$request_method$host$request_uri";'
 default[:wp][:conf][:fastcgi_cache_valid] = "200 60m;"
+
+
+default[:wp][:alert][:interval] = '2' # 2 minutes
+default[:wp][:alert][:server] = '' # NOTE, use a role
+default[:wp][:alert][:freq] = '600' # 10 minutes
