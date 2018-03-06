@@ -8,6 +8,7 @@ default[:wp][:mysql][:host] = 'localhost'
 default[:wp][:mysql][:password] = 'password'  # NOTE: Override this
 
 default[:wp][:packages] = %W[
+      ufw
       git
       vim
       nano
