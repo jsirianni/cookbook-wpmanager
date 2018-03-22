@@ -9,3 +9,14 @@ cron 'heartbeat' do
       minute  node[:wp][:alert][:interval]
       command "curl -sm 30 \"#{node[:wp][:alert][:server]}/?cronname=#{node[:hostname]}_gcp_heartbeat&account=#{node[:wp][:alert][:account]}&email=#{node[:wp][:alert][:email]}&frequency=#{node[:wp][:alert][:freq]}&tolerance=0\""
 end
+
+# Backup the configs once finished
+node[:wp][:sites].each do |site|
+      execute "backup #{site}" do
+            command "cp #{node[:wp][:conf][:default][:root]}/#{site}/wp-config.php"
+      end
+end
+
+# Remove the default index page
+#execute "remove default index" do
+#      command "rm #{node[:wp][:conf][:default][:root]}/index."
