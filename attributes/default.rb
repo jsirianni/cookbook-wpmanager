@@ -1,5 +1,6 @@
 default[:wp][:user] = 'www-data'
 default[:wp][:group] = 'www-data'
+default[:wp][:root] = "/var/www/html" # NOTE: Dont change without changing the config attribute
 
 # List of sites should be overriden with a role.
 default[:wp][:sites] = ['wordpress'] # NOTE: Override this

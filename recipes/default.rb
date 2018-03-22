@@ -13,7 +13,7 @@ end
 # Backup the configs once finished
 node[:wp][:sites].each do |site|
       execute "backup #{site}" do
-            command "cp #{node[:wp][:conf][:default][:root].strip(";")}/#{site}/wp-config.php /tmp/wp-config.php"
+            command "cp #{node[:wp][:root]}/#{site}/wp-config.php /tmp/wp-config.php"
       end
 end
 
