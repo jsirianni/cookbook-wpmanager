@@ -1,6 +1,7 @@
 default[:wp][:user] = 'www-data'
 default[:wp][:group] = 'www-data'
 default[:wp][:root] = "/var/www/html" # NOTE: Dont change without changing the config attribute
+default[:wp][:default_index] = "#{node[:wp][:root]}/index.nginx-debian.html"
 
 # List of sites should be overriden with a role.
 default[:wp][:sites] = ['wordpress'] # NOTE: Override this
