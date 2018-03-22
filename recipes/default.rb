@@ -14,6 +14,7 @@ end
 node[:wp][:sites].each do |site|
       execute "backup #{site}" do
             command "cp #{node[:wp][:root]}/#{site}/wp-config.php /tmp/wp-config.php"
+            not_if { File.exists?("/tmp/wp-config.php")}
       end
 end
 
