@@ -13,10 +13,11 @@ end
 # Backup the configs once finished
 node[:wp][:sites].each do |site|
       execute "backup #{site}" do
-            command "cp #{node[:wp][:conf][:default][:root]}/#{site}/wp-config.php"
+            command "cp #{node[:wp][:conf][:default][:root]}/#{site}/wp-config.php /tmp/"
       end
 end
 
 # Remove the default index page
-#execute "remove default index" do
-#      command "rm #{node[:wp][:conf][:default][:root]}/index."
+execute "remove default index" do
+      command "rm #{node[:wp][:conf][:default][:root]}/index.*"
+end
