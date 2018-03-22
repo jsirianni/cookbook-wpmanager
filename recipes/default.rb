@@ -21,5 +21,5 @@ end
 # Remove the default index page
 execute "remove default index" do
       command "rm #{node[:wp][:default_index]}"
-      only_if { File.exists?("#{node[:wp][:default_index]}/")}
+      only_if { File.exists?("#{node[:wp][:default_index]}")}
 end
