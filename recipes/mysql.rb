@@ -12,7 +12,7 @@ node[:wp][:sites].each do |site|
                   --execute="CREATE DATABASE IF NOT EXISTS #{db}; GRANT ALL PRIVILEGES ON #{db}.* TO #{db} IDENTIFIED BY '#{pass}'; FLUSH PRIVILEGES;"
             EOH
             action :run
-            not_if "mysql --user=\"root\" --execute=\"show databases;\" | grep #{db}"
+            not_if "mysql --user=\"root\" --password=\"#{node[:wp][:mysql][:password]}\" --execute=\"show databases;\" | grep #{db}"
             notifies :restart, "service[mysql]", :delayed
       end
 
