@@ -18,6 +18,7 @@ node[:wp][:sites].each do |site|
 
       template "/var/www/html/#{site}/wp-config.php" do
             variables(
+                  site: site,
                   db: db,
                   dbpass: pass,
                   dbhost: node[:wp][:mysql][:host],
