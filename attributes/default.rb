@@ -32,6 +32,7 @@ default[:wp][:packages] = %W[
       php7.1-ldap
       php7.1-zip
       php7.1-curl
+      libfcgi-bin
 ]
 
 default[:wp][:certbot][:packages] = %W[
@@ -57,3 +58,13 @@ default[:wp][:conf][:fastcgi_cache_valid] = "200 60m;"
 default[:wp][:alert][:interval] = '2' # 2 minutes
 default[:wp][:alert][:server] = '' # NOTE, use a role
 default[:wp][:alert][:freq] = '600' # 10 minutes
+
+
+default[:wp][:amplify][:enable] = false
+default[:wp][:amplify][:key] = '' # Override with a role
+default[:wp][:amplify][:installer] = '/tmp/amplify.sh'
+default[:wp][:amplify][:config][:hostname] = ''
+default[:wp][:amplify][:config][:mysqluser] = 'amplify-agent'
+default[:wp][:amplify][:config][:mysqlpass] = ''
+default[:wp][:amplify][:config][:phpfpm] = 'True'
+default[:wp][:amplify][:config][:mysql] = 'True'
