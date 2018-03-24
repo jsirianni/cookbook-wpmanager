@@ -66,8 +66,8 @@ end
 
 
 # Ensure certbot is version 0.21.1 or greater
-describe command('certbot --version | grep 0.21') do
-      its('stdout') { should eq "certbot 0.21.1\n" }
+describe command('certbot --version | grep 0.2') do
+      its('stdout') { should eq "certbot 0.22.2\n" }
       its('exit_status') { should eq 0 }
 end
 
@@ -158,8 +158,10 @@ end
 
 
 
-
-
+# Check amplify agent is installed correctly
+describe command('dpkg -s nginx-amplify-agent') do
+      its('exit_status') { should eq 0 }
+end
 
 
 
