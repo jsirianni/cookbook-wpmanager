@@ -1,3 +1,13 @@
+template "#{node[:wp][:nginx_home]}/nginx.conf" do
+      source 'nginx.conf.erb'
+      owner  'root'
+      group  'root'
+      mode   '0644'
+      action :create
+      notifies :reload, "service[nginx]", :delayed
+end
+
+
 template node[:wp][:conf][:default][:file] do
   source 'nginx.default.erb'
   owner  'root'
@@ -29,6 +39,22 @@ node[:wp][:sites].each do |site|
             mode 0777
             notifies :reload, "service[nginx]", :delayed
       end
+end
+
+
+template "#{node[:wp][:nginx_home]}/sites-available/metrics" do
+      source 'metrics.erb'
+      owner  'root'
+      group  'root'
+      mode   '0644'
+      action :create
+      notifies :reload, "service[nginx]", :delayed
+end
+
+link "#{node[:wp][:nginx_home]}/sites-enabled/metrics" do
+      to "#{node[:wp][:nginx_home]}/sites-available/metrics"
+      mode 0777
+      notifies :reload, "service[nginx]", :delayed
 end
 
 

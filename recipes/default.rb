@@ -3,18 +3,14 @@ include_recipe 'wpmanager::packages'
 include_recipe 'wpmanager::nginx'
 include_recipe 'wpmanager::wordpress'
 include_recipe 'wpmanager::mysql'
+include_recipe 'wpmanager::amplify'
 
-# Go cron config
-#cron 'heartbeat' do
-#      minute  node[:wp][:alert][:interval]
-#      command "curl -sm 30 \"#{node[:wp][:alert][:server]}/?cronname=#{node[:hostname]}_gcp_heartbeat&account=#{node[:wp][:alert][:account]}&email=#{node[:wp][:alert][:email]}&frequency=#{node[:wp][:alert][:freq]}&tolerance=0\""
-#end
 
 # Backup the configs once finished
 node[:wp][:sites].each do |site|
       execute "backup #{site}" do
-            command "cp #{node[:wp][:root]}/#{site}/wp-config.php /tmp/wp-config.php"
-            not_if { File.exists?("/tmp/wp-config.php")}
+            command "cp #{node[:wp][:root]}/#{site}/wp-config.php /tmp/#{site}.wp-config.php"
+            not_if { File.exists?("/tmp/#{site}.wp-config.php")}
       end
 end
 
