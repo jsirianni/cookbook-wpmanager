@@ -163,9 +163,19 @@ describe command('dpkg -s nginx-amplify-agent') do
       its('exit_status') { should eq 0 }
 end
 
+if node["wp"]["amplify"]["enable"] == true
+      describe systemd_service('amplify-agent') do
+            it { should be_enabled }
+            it { should be_running }
+      end
+end
 
-
-
+describe command('cat /etc/amplify-agent/agent.conf | grep \'phpfpm = True\'') do
+      its('exit_status') { should eq 0 }
+end
+describe command('cat /etc/amplify-agent/agent.conf | grep \'mysql = True\'') do
+      its('exit_status') { should eq 0 }
+end
 
 
 
