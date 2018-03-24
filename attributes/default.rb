@@ -55,11 +55,6 @@ default[:wp][:conf][:default][:fastcgi_cache_key] = '"$scheme$request_method$hos
 default[:wp][:conf][:fastcgi_cache_valid] = "200 60m;"
 
 
-default[:wp][:alert][:interval] = '2' # 2 minutes
-default[:wp][:alert][:server] = '' # NOTE, use a role
-default[:wp][:alert][:freq] = '600' # 10 minutes
-
-
 default[:wp][:amplify][:enable] = false
 default[:wp][:amplify][:key] = '' # Override with a role
 default[:wp][:amplify][:installer] = '/tmp/amplify.sh'
