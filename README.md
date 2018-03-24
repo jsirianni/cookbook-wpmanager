@@ -12,7 +12,7 @@ The following json is expected to be passed to `sudo chef-solo -c solo.rb -j <dn
         },
         "amplify": {
                 "enable": false,
-                "key": "b0455458fc4d524116ad95eba8afad90",
+                "key": "",
                 "config": {
                         "hostname": "",
                         "mysqlpass":""
