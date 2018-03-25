@@ -22,7 +22,7 @@ mysql = <%=node[:wp][:amplify][:config][:mysql]%>
 #port =
 unix_socket = /var/run/mysqld/mysqld.sock
 user = <%=node[:wp][:amplify][:config][:mysqluser]%>
-password = <%= @pass %>
+password = <%=node[:wp][:amplify][:config][:mysqlpass]%>
 [listeners]
 keys = syslog-default
 [listener_syslog-default]

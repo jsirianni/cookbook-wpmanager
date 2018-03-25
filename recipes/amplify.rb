@@ -1,16 +1,4 @@
-execute "add amplify mysql user" do
-      user    'root'
-      command <<-EOH
-            sudo mysql \
-            --user="root" \
-            --password="#{node[:wp][:mysql][:password]}" \
-            --execute="CREATE USER IF NOT EXISTS '#{node[:wp][:amplify][:config][:mysqluser]}' IDENTIFIED BY '#{node[:wp][:amplify][:config][:mysqlpass]}'; FLUSH PRIVILEGES;"
-      EOH
-      action :run
-      not_if "mysql --user=\"root\" --password=\"#{node[:wp][:mysql][:password]}\" --execute=\"SELECT * FROM mysql.user;\" | grep amplify-agent"
-      #not_if "mysql --user=\"root\" --password=\"#{node[:wp][:mysql][:password]}\" --execute=\"show databases;\""
 
-end
 
 
 template "/etc/php/7.1/fpm/pool.d/www.conf" do
@@ -38,9 +26,6 @@ execute 'install_amplify' do
 end
 
 template "/etc/amplify-agent/agent.conf" do
-      variables(
-            pass: node[:wp][:amplify][:config][:mysqluser]
-      )
       source 'agent.conf.erb'
       owner  node[:wp][:user]
       group  node[:wp][:group]

@@ -38,6 +38,18 @@ node[:wp][:sites].each do |site|
 
 end
 
+execute "add amplify mysql user" do
+      user    'root'
+      command <<-EOH
+            sudo mysql \
+            --user="root" \
+            --password="#{node[:wp][:mysql][:password]}" \
+            --execute="CREATE USER IF NOT EXISTS '#{node[:wp][:amplify][:config][:mysqluser]}' IDENTIFIED BY '#{node[:wp][:amplify][:config][:mysqlpass]}'; FLUSH PRIVILEGES;"
+      EOH
+      action :run
+      not_if "mysql --user=\"root\" --password=\"#{node[:wp][:mysql][:password]}\" --execute=\"SELECT * FROM mysql.user;\" | grep amplify-agent"
+      notifies :restart, "service[mysql]", :delayed
+end
 
 service 'mysql' do
       action :nothing
