@@ -179,8 +179,21 @@ end
 
 
 
-
-
+# Security tests
+describe command('cat /etc/php/7.1/fpm/php.ini | grep \'expose_php = Off\'') do
+      its('exit_status') { should eq 0 }
+end
+describe command('cat /etc/nginx/nginx.conf | grep \'# server_tokens off;\'') do
+      its('exit_status') { should eq 1 }
+end
+describe command('cat /etc/nginx/nginx.conf | grep \'server_tokens off;\'') do
+      its('exit_status') { should eq 0 }
+end
+sites.each do |site|
+      describe command("cat /var/www/html/#{site}/.htaccess | grep 'RewriteRule ^readme'") do
+            its('exit_status') { should eq 0 }
+      end
+end
 
 
 
