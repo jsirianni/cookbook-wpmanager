@@ -9,6 +9,14 @@ server {
         try_files $uri $uri/ /index.php?$args;
     }
     location ~ [^/]\.php(/|$) {
+
+        fastcgi_cache_key $scheme$host$request_uri$request_method;
+        fastcgi_cache_valid 200 301 302 30s;
+        fastcgi_cache_use_stale updating error timeout invalid_header http_500;
+        fastcgi_pass_header Set-Cookie;
+        fastcgi_pass_header Cookie;
+        fastcgi_ignore_headers Cache-Control Expires Set-Cookie;
+
         fastcgi_split_path_info  ^(.+\.php)(/.+)$;
         fastcgi_index            index.php;
         fastcgi_pass <%=node[:wp][:conf][:default][:fastcgi_pass]%>
