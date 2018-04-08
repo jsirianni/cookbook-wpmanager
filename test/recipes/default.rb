@@ -196,8 +196,14 @@ sites.each do |site|
 end
 
 
-
-
+# Validate php config
+# Ensure certbot is version 0.21.1 or greater
+describe command('cat /etc/php/7.1/cli/php.ini | grep 16M') do
+      its('exit_status') { should eq 0 }
+end
+describe command('cat /etc/php/7.1/fpm/php.ini | grep 16M') do
+      its('exit_status') { should eq 0 }
+end
 
 
 

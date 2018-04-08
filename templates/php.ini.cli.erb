@@ -27,13 +27,14 @@
 ; special sections cannot be overridden by user-defined INI files or
 ; at runtime. Currently, [PATH=] and [HOST=] sections only work under
 ; CGI/FastCGI.
+; E_CORE_WARNING    - warnings (non-fatal errors) that occur during PHP's
 ; http://php.net/ini.sections
-; E_ALL             - All errors and warnings (includes E_STRICT as of PHP 5.4.0)
+
 ; Directives are specified using the following syntax:
 ; directive = value
 ; Directive names are *case sensitive* - foo=bar is different from FOO=bar.
 ; Directives are variables used to configure PHP or PHP extensions.
-; There is no name validation.  If PHP can't find an expected
+; There is no name validation.  If PHP can't find an expectedf
 ; directive because it is not set or is mistyped, a default value will be used.
 
 ; The value can be a string, a number, a PHP constant (e.g. E_ALL or M_PI), one
@@ -367,7 +368,7 @@ zend.enable_gc = On
 ; threat in any way, but it makes it possible to determine whether you use PHP
 ; on your server or not.
 ; http://php.net/expose-php
-expose_php = Off
+expose_php = On
 
 ;;;;;;;;;;;;;;;;;;;
 ; Resource Limits ;
@@ -397,7 +398,7 @@ max_input_time = 60
 
 ; Maximum amount of memory a script may consume (128MB)
 ; http://php.net/memory-limit
-memory_limit = 128M
+memory_limit = -1
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Error handling and logging ;

@@ -63,3 +63,7 @@ default[:wp][:amplify][:config][:mysqluser] = 'amplify-agent'
 default[:wp][:amplify][:config][:mysqlpass] = ''
 default[:wp][:amplify][:config][:phpfpm] = 'True'
 default[:wp][:amplify][:config][:mysql] = 'True'
+
+
+default[:wp][:php][:cli][:ini] = '/etc/php/7.1/cli/php.ini'
+default[:wp][:php][:fpm][:ini] = '/etc/php/7.1/fpm/php.ini'
