@@ -4,7 +4,7 @@ server {
     listen [::]:80;
     root /var/www/html/<%=@virtualsite%>;
     index  index.php index.html index.htm;
-    server_name <%=@virtualsite%> www.<%=@virtualsite%>;
+    server_name <%=@virtualsite%>;
     location / {
         try_files $uri $uri/ /index.php?$args;
     }
