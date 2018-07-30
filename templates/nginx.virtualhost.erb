@@ -32,19 +32,4 @@ server {
     access_log /var/log/nginx/access.log main_ext;
     error_log  /var/log/nginx/error.log warn;
 
-    #
-    # Begin blocking
-    #
-    #location ~* /(\.|wp-config\.php|wp-config\.txt|changelog\.txt|readme\.txt|readme\.html|license\.txt) { deny all; }
-    #location ~ /(\.|wp-config.php|readme.html|license.txt|schema.txt|password.txt|passwords.txt) { deny all; }
-    #location ~* \.(pl|cgi|py|sh|lua)\$ { return 444; }
-    #location ~* (roundcube|webdav|smtp|http\:|soap|w00tw00t) { return 444; }
-    #location ~* \.(engine|inc|info|install|make|module|profile|test|po|sh|.*sql|theme|tpl(\.php)?|xtmpl)$|^(\..*|Entries.*|Repository|Root|Tag|Template)$|\.php_ {
-    #      return 444;
-    #}
-    #location ~* /(?:uploads|files)/.*\.php$ {
-    #location ~* /(?:uploads|files|wp-content|wp-includes)/.*\.php\$ { deny all; }
-    #location ~* /wp-content/.*\.php\$ { deny all;  }
-    #location ~* /wp-includes/.*\.php\$ { deny all; }
-
 }
