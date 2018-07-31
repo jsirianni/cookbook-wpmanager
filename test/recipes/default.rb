@@ -67,7 +67,7 @@ end
 
 # Ensure certbot is version 0.21.1 or greater
 describe command('certbot --version | grep 0.2') do
-      its('stdout') { should eq "certbot 0.22.2\n" }
+      its('stdout') { should eq "certbot 0.25.0\n" }
       its('exit_status') { should eq 0 }
 end
 
@@ -119,8 +119,7 @@ end
 sites.each do |site|
       ["\"root /var/www/html/#{site}\"",
       "\"index  index.php index.html index.htm;\"",
-      "\"fastcgi_pass unix:/var/run/php/php7.1-fpm.sock\"",
-      "\"fastcgi_cache_valid 200 60m;\""].each do |match|
+      "\"fastcgi_pass unix:/var/run/php/php7.1-fpm.sock\""].each do |match|
             describe command("cat #{nginx_enabled}/#{site} | grep #{match}") do
                   its('exit_status') { should eq 0 }
             end
@@ -159,23 +158,23 @@ end
 
 
 # Check amplify agent is installed correctly
-describe command('dpkg -s nginx-amplify-agent') do
-      its('exit_status') { should eq 0 }
-end
+#describe command('dpkg -s nginx-amplify-agent') do
+#      its('exit_status') { should eq 0 }
+#end
 
-if node["wp"]["amplify"]["enable"] == true
-      describe systemd_service('amplify-agent') do
-            it { should be_enabled }
-            it { should be_running }
-      end
-end
+#if node["wp"]["amplify"]["enable"] == true
+#      describe systemd_service('amplify-agent') do
+#            it { should be_enabled }
+#            it { should be_running }
+#      end
+#end
 
-describe command('cat /etc/amplify-agent/agent.conf | grep \'phpfpm = True\'') do
-      its('exit_status') { should eq 0 }
-end
-describe command('cat /etc/amplify-agent/agent.conf | grep \'mysql = True\'') do
-      its('exit_status') { should eq 0 }
-end
+#describe command('cat /etc/amplify-agent/agent.conf | grep \'phpfpm = True\'') do
+#      its('exit_status') { should eq 0 }
+#end
+#describe command('cat /etc/amplify-agent/agent.conf | grep \'mysql = True\'') do
+#      its('exit_status') { should eq 0 }
+#end
 
 
 
