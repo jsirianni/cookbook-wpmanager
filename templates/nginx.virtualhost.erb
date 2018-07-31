@@ -1,50 +1,32 @@
-#fastcgi_cache_path /var/run/nginx-cache-<%=@virtualsite%> levels=1:2 keys_zone=<%=@virtualsite%>:100m inactive=60m;
 server {
     listen 80;
     listen [::]:80;
+
     root /var/www/html/<%=@virtualsite%>;
     index  index.php index.html index.htm;
-    server_name <%=@virtualsite%>;
+
+    server_name <%=@virtualsite%> www.<%=@virtualsite%>;
+
     location / {
         try_files $uri $uri/ /index.php?$args;
     }
-    location ~ [^/]\.php(/|$) {
 
-#        fastcgi_cache_key $scheme$host$request_uri$request_method;
-#        fastcgi_cache_valid 200 301 302 30s;
-#        fastcgi_cache_use_stale updating error timeout invalid_header http_500;
+    location ~ [^/]\.php(/|$) {
         fastcgi_pass_header Set-Cookie;
         fastcgi_pass_header Cookie;
         fastcgi_ignore_headers Cache-Control Expires Set-Cookie;
 
         fastcgi_split_path_info  ^(.+\.php)(/.+)$;
-        fastcgi_index            index.php;
+        fastcgi_index index.php;
         fastcgi_pass <%=node[:wp][:conf][:default][:fastcgi_pass]%>
-        include                  fastcgi_params;
+        include fastcgi_params;
         fastcgi_param   PATH_INFO       $fastcgi_path_info;
         fastcgi_param   SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        fastcgi_cache <%=@virtualsite%>;
-#        fastcgi_cache_valid <%=node[:wp][:conf][:fastcgi_cache_valid]%>
 
         # Prevent username enumerations
         if ( $query_string ~ "author=([0-9]*)" ) { return 403; }
     }
+
     access_log /var/log/nginx/access.log main_ext;
     error_log  /var/log/nginx/error.log warn;
-
-    #
-    # Begin blocking
-    #
-    #location ~* /(\.|wp-config\.php|wp-config\.txt|changelog\.txt|readme\.txt|readme\.html|license\.txt) { deny all; }
-    #location ~ /(\.|wp-config.php|readme.html|license.txt|schema.txt|password.txt|passwords.txt) { deny all; }
-    #location ~* \.(pl|cgi|py|sh|lua)\$ { return 444; }
-    #location ~* (roundcube|webdav|smtp|http\:|soap|w00tw00t) { return 444; }
-    #location ~* \.(engine|inc|info|install|make|module|profile|test|po|sh|.*sql|theme|tpl(\.php)?|xtmpl)$|^(\..*|Entries.*|Repository|Root|Tag|Template)$|\.php_ {
-    #      return 444;
-    #}
-    #location ~* /(?:uploads|files)/.*\.php$ {
-    #location ~* /(?:uploads|files|wp-content|wp-includes)/.*\.php\$ { deny all; }
-    #location ~* /wp-content/.*\.php\$ { deny all;  }
-    #location ~* /wp-includes/.*\.php\$ { deny all; }
-
 }

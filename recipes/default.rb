@@ -4,7 +4,7 @@ include_recipe 'wpmanager::php'
 include_recipe 'wpmanager::nginx'
 include_recipe 'wpmanager::wordpress'
 include_recipe 'wpmanager::mysql'
-include_recipe 'wpmanager::amplify'
+#include_recipe 'wpmanager::amplify'
 
 
 
