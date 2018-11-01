@@ -19,6 +19,5 @@ suites:
           wp:
             sites:
               - siriannitest.duckdns.org
-              - siriannitest1.duckdns.org
             mysql:
               password: "securepassword"
