@@ -18,7 +18,6 @@ suites:
     attributes:
           wp:
             sites:
-              - star-power.com
-              #- siriannitest1.duckdns.org
+              - siriannitest.duckdns.org
             mysql:
               password: "securepassword"
