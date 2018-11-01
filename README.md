@@ -9,14 +9,6 @@ The following json is expected to be passed to `sudo chef-solo -c solo.rb -j <dn
         "sites":["example.com","example2.com"],
         "mysql":{
                 "password": ""
-        },
-        "amplify": {
-                "enable": false,
-                "key": "",
-                "config": {
-                        "hostname": "",
-                        "mysqlpass":""
-                }
         }
 },
 "run_list":["recipe[wpmanager::default]"]}

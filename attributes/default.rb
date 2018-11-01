@@ -55,15 +55,5 @@ default[:wp][:conf][:default][:fastcgi_cache_key] = '"$scheme$request_method$hos
 default[:wp][:conf][:fastcgi_cache_valid] = "200 60m;"
 
 
-default[:wp][:amplify][:enable] = false
-default[:wp][:amplify][:key] = '' # Override with a role
-default[:wp][:amplify][:installer] = '/tmp/amplify.sh'
-default[:wp][:amplify][:config][:hostname] = ''
-default[:wp][:amplify][:config][:mysqluser] = 'amplify-agent'
-default[:wp][:amplify][:config][:mysqlpass] = ''
-default[:wp][:amplify][:config][:phpfpm] = 'True'
-default[:wp][:amplify][:config][:mysql] = 'True'
-
-
 default[:wp][:php][:cli][:ini] = '/etc/php/7.1/cli/php.ini'
 default[:wp][:php][:fpm][:ini] = '/etc/php/7.1/fpm/php.ini'

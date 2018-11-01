@@ -4,7 +4,6 @@ include_recipe 'wpmanager::php'
 include_recipe 'wpmanager::nginx'
 include_recipe 'wpmanager::wordpress'
 include_recipe 'wpmanager::mysql'
-#include_recipe 'wpmanager::amplify'
 
 
 
@@ -13,12 +12,6 @@ node[:wp][:sites].each do |site|
       execute "backup #{site}" do
             command "cp #{node[:wp][:root]}/#{site}/wp-config.php /tmp/#{site}.wp-config.php"
             not_if { File.exists?("/tmp/#{site}.wp-config.php")}
-      end
-
-      # Block access to readme
-      execute 'block readme.html' do
-            command "echo \"RewriteRule ^readme\\.html$ - [R=404,L,NC]\" >> /var/www/html/#{site}/.htaccess"
-            not_if ("cat /var/www/html/#{site}/.htaccess | grep \"RewriteRule ^readme\"")
       end
 end
 
